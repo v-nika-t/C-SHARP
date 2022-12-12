@@ -23,3 +23,5 @@ if(number_2 > number_1) {
 remainder = max % min;
 result = remainder != 0 ? $"Не кратно, остаток {remainder}" : "кратно";
 Console.WriteLine(result);
+
+
