@@ -8,23 +8,24 @@
 // ​
 // 8 7,8 -7,1 9
 
-int[] fillRandomNumber(int length, int rangeMin, int rangeMax) {
-    int[] arrayRandomNumber = new int [length];
-    Random random = new Random();
-    for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-        arrayRandomNumber[i] = random.Next(rangeMin, rangeMax);
-        Console.WriteLine(arrayRandomNumber[i]);
-    }
-    return arrayRandomNumber;
+double [,]  CreateMatrix(int row, int column, int minRandomNumber  , int maxRandomNumber) {
+        double [,] matrix  = new double[row, column];
+        var random= new Random();
+        string [] typeNumber = {"double", "int"};
+        string [] rangeNumber = {"negative", "positive"}; 
+        for(int i = 0; i < matrix.GetLength(0); i++) {
+           for(int k = 0; k < matrix.GetLength(1); k++) {
+                 int indexRandom = random.Next(0, 2);
+                 double randomNumber = random.NextDouble();
+                 randomNumber = random.Next(minRandomNumber, maxRandomNumber) + randomNumber;
+                 randomNumber = typeNumber[indexRandom] == "double" ? Math.Round(randomNumber, 2) : Math.Round(randomNumber);
+                 matrix[i , k] = randomNumber;
+                 Console.Write($"{randomNumber}  ");
+           }
+          Console.WriteLine("");
+        }
+
+        return matrix;
 }
 
-int[] arrayRandomNumber = fillRandomNumber(123, 0, 151);
-
-int quantity = 0;
-
-for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-    if( arrayRandomNumber[i] <= 99 && arrayRandomNumber[i] >= 10 ) quantity++;
-   
-}
-
-Console.WriteLine(quantity);
+double [,] matrix = CreateMatrix(3, 3, -5 , 10);
