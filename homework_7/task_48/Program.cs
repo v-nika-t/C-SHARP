@@ -5,23 +5,17 @@
 // 1 2 3 4
 // 2 3 4 5
 
-int[] fillRandomNumber(int length, int rangeMin, int rangeMax) {
-    int[] arrayRandomNumber = new int [length];
-    Random random = new Random();
-    for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-        arrayRandomNumber[i] = random.Next(rangeMin, rangeMax);
-        Console.WriteLine(arrayRandomNumber[i]);
-    }
-    return arrayRandomNumber;
+int [,] CreateMatrix(int row, int column) {
+        int [,] matrix = new int[row, column];
+        for(int i = 0; i < matrix.GetLength(0); i++) {
+           for(int k = 0; k < matrix.GetLength(1); k++) {
+               matrix[i , k] = i + k;
+               Console.Write($"{matrix[i , k]} ");
+           }
+          Console.WriteLine("");
+        }
+
+        return matrix;
 }
 
-int[] arrayRandomNumber = fillRandomNumber(123, 0, 151);
-
-int quantity = 0;
-
-for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-    if( arrayRandomNumber[i] <= 99 && arrayRandomNumber[i] >= 10 ) quantity++;
-   
-}
-
-Console.WriteLine(quantity);
+int [,] matrix = CreateMatrix(3, 3);

@@ -7,24 +7,27 @@
 // ​
 // Доп. условие для 51 задачи: сделать суммирование в один цикл. Матрица может быть прямоугольной
 
-int[] fillRandomNumber(int length, int rangeMin, int rangeMax) {
-    int[] arrayRandomNumber = new int [length];
-    Random random = new Random();
-    for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-        arrayRandomNumber[i] = random.Next(rangeMin, rangeMax);
-        Console.WriteLine(arrayRandomNumber[i]);
-    }
-    return arrayRandomNumber;
+int [,] CreateMatrix(int row, int column, int minRandomNumber, int maxRandomNumber) {
+        int [,] matrix = new int[row, column];
+        var random = new Random();
+        for(int i = 0; i < matrix.GetLength(0); i++) {
+           for(int k = 0; k < matrix.GetLength(1); k++) {
+               matrix[i , k] = random.Next(minRandomNumber, maxRandomNumber + 1);
+               Console.Write($"{matrix[i , k]} ");
+           }
+          Console.WriteLine("");
+        }
+
+        return matrix;
 }
 
-int[] arrayRandomNumber = fillRandomNumber(5, 100, 1000);
-int quantity = 0;
-
-
-for( int i = 0; i < arrayRandomNumber.Length; i++ ) {
-    if( arrayRandomNumber[i] % 2 == 0) quantity++;
-   
+//int [,] matrix = CreateMatrix(3, 3, 0 , 10); //  square
+//int [,] matrix = CreateMatrix(3, 2, 0 , 10); // rectangle
+int [,] matrix = CreateMatrix(2, 3, 0 , 10);  // rectangle
+int sum = 0;
+ for(int i = 0; i < matrix.GetLength(0); i++) {
+    if(i == matrix.GetLength(1)) break;
+    sum += matrix[i, i];
 }
 
-Console.WriteLine(quantity);
-
+Console.WriteLine($"sum = {sum}");
