@@ -7,15 +7,18 @@
 
 // 45(1,0,0) 53(1,0,1)
 
-int [,,] CreateThreeDMatrix(int x, int y, int z,  int minRandomNumber, int maxRandomNumber) {
-        int[] perm = Enumerable.Range(minRandomNumber, maxRandomNumber).ToArray();
+int [,,]? CreateThreeDMatrix(int x, int y, int z,  int min, int max) {
         int [,,] matrix = new int[x, y, z];
-        var random = new Random();
+        int step = min;
+        if( (matrix.GetLength(0) + matrix.GetLength(1) + matrix.GetLength(2)) > (max - min) ) {
+             Console.WriteLine("Кол-во ячеейк матрицы больше чем чисел в диопозоне. Ячейки не смогут быть заполнены неповторяющимеся числам."); 
+             return null;
+        }
         for(int i = 0; i < matrix.GetLength(0); i++) {
             for(int e = 0; e < matrix.GetLength(1); e++) {
                 for(int k = 0; k < matrix.GetLength(2); k++) {
-                    matrix[i , e,  k] = random.Next(minRandomNumber, maxRandomNumber + 1);
-                    Console.Write($"{matrix[i , e,  k]} ");
+                    matrix[i , e,  k] = step++;
+                    Console.Write($"{matrix[i , e,  k]}({i} , {e} , {k}) ");
                 }
             Console.WriteLine(""); 
             }
@@ -26,4 +29,4 @@ int [,,] CreateThreeDMatrix(int x, int y, int z,  int minRandomNumber, int maxRa
 }
 
 
-int [,,] matrix = CreateThreeDMatrix(3, 3, 3,  10 , 37); 
+int [,,]? matrix = CreateThreeDMatrix(3, 3, 3,  10 , 99); 

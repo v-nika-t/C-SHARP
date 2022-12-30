@@ -27,7 +27,8 @@ void ShowMatrix(int [,] matrix) {
 
 }
 
-void SwapRowColumn(int [,] matrix) {
+void SwapRowColumn(int [,] matrix) { // попробовать поменять.Разные строки и столбцы
+//Решение проще https://prnt.sc/6HyW-c-vMorB
     int startIndex = 1;
     if(matrix.GetLength(0) != matrix.GetLength(1)) {
         Console.WriteLine("Невозможно выполнить");

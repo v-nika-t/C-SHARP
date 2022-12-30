@@ -11,32 +11,71 @@
 // 10 9 8 7
 
 
-int [,] CreateMatrix(int row, int column, int minRandomNumber, int maxRandomNumber) {
-        int [,] matrix = new int[row, column];
-        var random = new Random();
+void ShowMatrix(int [,] matrix) {
         for(int i = 0; i < matrix.GetLength(0); i++) {
            for(int k = 0; k < matrix.GetLength(1); k++) {
-               matrix[i , k] = random.Next(minRandomNumber, maxRandomNumber + 1);
                Console.Write($"{matrix[i , k]} ");
            }
           Console.WriteLine("");
         }
+        Console.WriteLine("");
 
-        return matrix;
-}
+};
 
+int[,] ? CreateMatrix(int x, int y) {
+    if( x != y ) {
+      Console.WriteLine("Введите одинаковые x и y");
+      return null;
+    }
+    int[,] matrix = new int[x,y];
+    bool column = true;
+    bool reverse = false;
+    int value = 1;
+    int countStep = matrix.GetLength(0);
+    int count = 0;
+    int offsetColumnStart = 0;
+    int offseRowStart = 0;
+    int offsetColumnEnd = 0;
+    int offseRowEnd = 0;
+    int length = matrix.GetLength(0) - 1;
+                                                                                                                                                                                                                                                            
+   for(int i = 0; i < countStep; i++) {
+      reverse = count % 2 != 0;
+      if(column) {
+        for(int k = 0; k < countStep ; k++) { 
+          if(!reverse) {
+            matrix[offseRowStart, offsetColumnStart + k] = value++;
+          } else {
+            matrix[length - offseRowEnd, length - offsetColumnEnd - k] = value++;
+          }
+        };
+    
+        if(!reverse) offseRowStart++;
+        if(reverse) offseRowEnd++;
+        column = false;
+        i=-1;
+        countStep--;
 
-int[] GetColumnValueAverageOfMatrix (int[,] matrix) {
-  int quantituColumn = matrix.GetLength(1);
-  int [] average = new int[quantituColumn];
-  for(int i = 0; i < matrix.GetLength(1); i++) {
-      for(int k = 0; k < quantituColumn; k++) {
-          average[i] += matrix[k, i];
+      } else {
+          if(!reverse) {
+            matrix[offseRowStart + i, length - offsetColumnEnd] = value++;
+          } else {
+            matrix[length - offseRowEnd - i, offsetColumnStart] = value++;
+          }
+        if((i + 1) == countStep) {
+          i = -1;
+          column = true;
+          if(!reverse) offsetColumnEnd++;
+          if(reverse) offsetColumnStart++;;
+          count++;
+        }
       }
-  Console.WriteLine(average[i]);
-}
-  return average;
+   }
+   return matrix;
 }
 
-int [,] matrix = CreateMatrix(3, 3, 0 , 10);
-int[] average= GetColumnValueAverageOfMatrix(matrix);
+
+
+
+int[,] ? matrix =  CreateMatrix(4, 4);
+if(matrix != null) ShowMatrix( matrix);
